@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Repositories;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class SocioRepository
+    public class SocioRepository : ISocioRepository
     {
         private readonly ClubeDbContext _context;
 
