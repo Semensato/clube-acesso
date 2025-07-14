@@ -1,4 +1,6 @@
+using Domain.Repositories;
 using Infrastructure.Persistence;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ClubeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+// DI
+builder.Services.AddScoped<ISocioRepository, SocioRepository>();
+builder.Services.AddScoped<IPlanoAcessoRepository, PlanoAcessoRepository>();
+builder.Services.AddScoped<IAreaClubeRepository, AreaClubeRepository>();
+builder.Services.AddScoped<ITentativaAcessoRepository, TentativaAcessoRepository>();
 
 var app = builder.Build();
 
