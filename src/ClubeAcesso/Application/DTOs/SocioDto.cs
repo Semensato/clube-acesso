@@ -10,7 +10,7 @@ namespace Application.DTOs
     {
         public Guid Id { get; set; }
         public string Nome { get; set; } = null!;
-        public string Cpf { get; set; } = null!;
+        public string Documento { get; set; } = null!;
         public PlanoAcessoDto PlanoAcesso { get; set; } = null!;
     }
 }
