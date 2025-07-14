@@ -47,5 +47,10 @@ namespace Infrastructure.Repositories
         {
             _context.Tentativas.Update(entity);
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

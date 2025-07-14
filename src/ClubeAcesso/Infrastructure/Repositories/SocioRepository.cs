@@ -49,5 +49,10 @@ namespace Infrastructure.Repositories
         {
             _context.Socios.Update(entity);
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

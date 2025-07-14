@@ -13,5 +13,6 @@ namespace Domain.Repositories
         Task AddAsync(T entity);
         void Update(T entity);
         void Remove(T entity);
+        Task SaveChangesAsync();
     }
 }

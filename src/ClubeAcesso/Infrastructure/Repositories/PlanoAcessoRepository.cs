@@ -24,13 +24,21 @@ namespace Infrastructure.Repositories
             await _context.Planos.AddAsync(entity);
         }
 
-        public async Task<IEnumerable<PlanoAcesso>> GetAllAsync()
+        public async Task<IEnumerable<PlanoAcesso>> GetAllAsync(bool includeAreas = false)
         {
+            if (includeAreas)
+                return await _context.Planos.Include(p => p.Areas).ToListAsync();
+
             return await _context.Planos.ToListAsync();
         }
 
-        public async Task<PlanoAcesso?> GetByIdAsync(Guid id)
+        public async Task<PlanoAcesso?> GetByIdAsync(Guid id, bool includeAreas = false)
         {
+            if (includeAreas)
+                return await _context.Planos
+                    .Include(p => p.Areas)
+                    .FirstOrDefaultAsync(p => p.Id == id);
+
             return await _context.Planos.FindAsync(id);
         }
 
@@ -47,6 +55,21 @@ namespace Infrastructure.Repositories
         public void Update(PlanoAcesso entity)
         {
             _context.Planos.Update(entity);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public Task<PlanoAcesso?> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<PlanoAcesso>> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
