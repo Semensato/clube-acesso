@@ -44,6 +44,11 @@ namespace Infrastructure.Repositories
             _context.Areas.Remove(entity);
         }
 
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public void Update(AreaClube entity)
         {
             _context.Areas.Update(entity);

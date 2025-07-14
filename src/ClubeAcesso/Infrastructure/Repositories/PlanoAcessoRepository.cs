@@ -48,5 +48,10 @@ namespace Infrastructure.Repositories
         {
             _context.Planos.Update(entity);
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
