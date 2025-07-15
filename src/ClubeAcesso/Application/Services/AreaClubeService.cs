@@ -19,29 +19,29 @@ namespace Application.Services
             _areaClubeRepository = areaClubeRepository;
         }
 
-        public async Task<IEnumerable<AreaClubeDto>> ListarAsync()
+        public async Task<IEnumerable<AreaClubeResponseDto>> ListarAsync()
         {
             var areas = await _areaClubeRepository.GetAllAsync();
-            return areas.Select(a => new AreaClubeDto
+            return areas.Select(a => new AreaClubeResponseDto
             {
                 Id = a.Id,
                 Nome = a.Nome
             });
         }
 
-        public async Task<AreaClubeDto?> ObterPorIdAsync(Guid id)
+        public async Task<AreaClubeResponseDto?> ObterPorIdAsync(Guid id)
         {
             var area = await _areaClubeRepository.GetByIdAsync(id);
             if (area == null) return null;
 
-            return new AreaClubeDto
+            return new AreaClubeResponseDto
             {
                 Id = area.Id,
                 Nome = area.Nome
             };
         }
 
-        public async Task CriarAsync(AreaClubeDto dto)
+        public async Task<AreaClubeResponseDto?> CriarAsync(AreaClubeRequestDto dto)
         {
             var novaArea = new AreaClube
             {
@@ -51,9 +51,15 @@ namespace Application.Services
 
             await _areaClubeRepository.AddAsync(novaArea);
             await _areaClubeRepository.SaveChangesAsync();
+
+            return new AreaClubeResponseDto
+            {
+                Id= novaArea.Id,
+                Nome = novaArea.Nome
+            };
         }
 
-        public async Task AtualizarAsync(Guid id, AreaClubeDto dto)
+        public async Task AtualizarAsync(Guid id, AreaClubeRequestDto dto)
         {
             var areaExistente = await _areaClubeRepository.GetByIdAsync(id);
             if (areaExistente == null)

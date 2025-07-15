@@ -33,7 +33,7 @@ namespace Application.Services
                 {
                     Id = s.Plano.Id,
                     Nome = s.Plano.Nome,
-                    Areas = s.Plano.Areas.Select(a => new AreaClubeDto
+                    Areas = s.Plano.Areas.Select(a => new AreaClubeResponseDto
                     {
                         Id = a.Id,
                         Nome = a.Nome
@@ -56,7 +56,7 @@ namespace Application.Services
                 {
                     Id = socio.Plano.Id,
                     Nome = socio.Plano.Nome,
-                    Areas = socio.Plano.Areas.Select(a => new AreaClubeDto
+                    Areas = socio.Plano.Areas.Select(a => new AreaClubeResponseDto
                     {
                         Id = a.Id,
                         Nome = a.Nome
@@ -78,7 +78,7 @@ namespace Application.Services
                 Plano = new PlanoAcessoResponseDto
                 {
                     Id = socio.Plano.Id,
-                    Areas = socio.Plano.Areas.Select(a => new AreaClubeDto
+                    Areas = socio.Plano.Areas.Select(a => new AreaClubeResponseDto
                     {
                         Id = a.Id,
                         Nome = a.Nome
@@ -108,7 +108,7 @@ namespace Application.Services
                 Plano = new PlanoAcessoResponseDto
                 {
                     Id = novoSocio.Plano.Id,
-                    Areas = novoSocio.Plano.Areas.Select(a => new AreaClubeDto
+                    Areas = novoSocio.Plano.Areas.Select(a => new AreaClubeResponseDto
                     {
                         Id = a.Id,
                         Nome = a.Nome

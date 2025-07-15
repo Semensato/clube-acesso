@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Socio;
+﻿using Application.DTOs.PlanoAcesso;
+using Application.DTOs.Socio;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(SocioResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> Listar()
         {
             var socios = await _socioService.ListarAsync();
@@ -23,6 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(SocioResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterPorId(Guid id)
         {
             var socio = await _socioService.ObterPorIdAsync(id);
@@ -33,6 +36,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(SocioResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> Criar([FromBody] SocioRequestDto dto)
         {
             var novoSocio = await _socioService.CriarAsync(dto);

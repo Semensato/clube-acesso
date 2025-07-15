@@ -11,6 +11,6 @@ namespace Application.DTOs.PlanoAcesso
     {
         public Guid Id { get; set; }
         public string Nome { get; set; } = null!;
-        public ICollection<AreaClubeDto> Areas { get; set; } = new List<AreaClubeDto>();
+        public ICollection<AreaClubeResponseDto> Areas { get; set; } = new List<AreaClubeResponseDto>();
     }
 }

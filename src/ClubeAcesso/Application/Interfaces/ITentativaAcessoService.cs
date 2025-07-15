@@ -9,7 +9,7 @@ namespace Application.Interfaces
 {
     public interface ITentativaAcessoService
     {
-        Task RegistrarAcessoAsync(TentativaAcessoRequestDto dto);
+        Task<TentativaAcessoResponseDto?> RegistrarAcessoAsync(TentativaAcessoRequestDto dto);
         Task<IEnumerable<TentativaAcessoResponseDto>> ObterPorSocioIdAsync(Guid socioId);
     }
 }

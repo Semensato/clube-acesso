@@ -9,10 +9,10 @@ namespace Application.Interfaces
 {
     public interface IAreaClubeService
     {
-        Task<IEnumerable<AreaClubeDto>> ListarAsync();
-        Task<AreaClubeDto?> ObterPorIdAsync(Guid id);
-        Task CriarAsync(AreaClubeDto dto);
-        Task AtualizarAsync(Guid id, AreaClubeDto dto);
+        Task<IEnumerable<AreaClubeResponseDto>> ListarAsync();
+        Task<AreaClubeResponseDto?> ObterPorIdAsync(Guid id);
+        Task<AreaClubeResponseDto?> CriarAsync(AreaClubeRequestDto dto);
+        Task AtualizarAsync(Guid id, AreaClubeRequestDto dto);
         Task RemoverAsync(Guid id);
     }
 }

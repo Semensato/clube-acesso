@@ -1,4 +1,5 @@
-﻿using Application.DTOs.PlanoAcesso;
+﻿using Application.DTOs.AreaClube;
+using Application.DTOs.PlanoAcesso;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(PlanoAcessoResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> Listar()
         {
             var planos = await _planoAcessoService.ListarAsync();
@@ -23,6 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(PlanoAcessoResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterPorId(Guid id)
         {
             var plano = await _planoAcessoService.ObterPorIdAsync(id);
@@ -33,6 +36,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(PlanoAcessoResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> Criar([FromBody] PlanoAcessoRequestDto dto)
         {
             var novoPlano = await _planoAcessoService.CriarAsync(dto);

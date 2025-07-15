@@ -16,6 +16,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(AreaClubeResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> Listar()
         {
             var areas = await _areaClubeService.ListarAsync();
@@ -23,6 +24,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(AreaClubeResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterPorId(Guid id)
         {
             var area = await _areaClubeService.ObterPorIdAsync(id);
@@ -33,14 +35,15 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] AreaClubeDto dto)
+        [ProducesResponseType(typeof(AreaClubeResponseDto), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Criar([FromBody] AreaClubeRequestDto dto)
         {
-            await _areaClubeService.CriarAsync(dto);
-            return CreatedAtAction(nameof(ObterPorId), new { id = dto.Id }, dto);
+            var novaArea = await _areaClubeService.CriarAsync(dto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = novaArea.Id }, dto);
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Atualizar(Guid id, [FromBody] AreaClubeDto dto)
+        public async Task<IActionResult> Atualizar(Guid id, [FromBody] AreaClubeRequestDto dto)
         {
             try
             {
