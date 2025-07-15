@@ -12,7 +12,7 @@ namespace Application.Interfaces
         Task<IEnumerable<SocioResponseDto>> ListarAsync();
         Task<SocioResponseDto?> ObterPorIdAsync(Guid id);
         Task<SocioResponseDto?> ObterPorCpfAsync(string cpf);
-        Task CriarAsync(SocioRequestDto dto);
+        Task<SocioResponseDto?> CriarAsync(SocioRequestDto dto);
         Task AtualizarAsync(Guid id, SocioRequestDto dto);
         Task RemoverAsync(Guid id);
     }

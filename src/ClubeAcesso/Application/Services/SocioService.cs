@@ -87,7 +87,7 @@ namespace Application.Services
             };
         }
 
-        public async Task CriarAsync(SocioRequestDto dto)
+        public async Task<SocioResponseDto?> CriarAsync(SocioRequestDto dto)
         {
             var novoSocio = new Socio
             {
@@ -99,6 +99,22 @@ namespace Application.Services
 
             await _socioRepository.AddAsync(novoSocio);
             await _socioRepository.SaveChangesAsync();
+
+            return new SocioResponseDto
+            {
+                Id= novoSocio.Id,
+                Nome= novoSocio.Nome,
+                Documento   = novoSocio.Documento,
+                Plano = new PlanoAcessoResponseDto
+                {
+                    Id = novoSocio.Plano.Id,
+                    Areas = novoSocio.Plano.Areas.Select(a => new AreaClubeDto
+                    {
+                        Id = a.Id,
+                        Nome = a.Nome
+                    }).ToList()
+                }
+            };
         }
 
         public async Task AtualizarAsync(Guid id, SocioRequestDto dto)

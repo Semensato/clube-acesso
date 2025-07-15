@@ -56,7 +56,7 @@ namespace Application.Services
             };
         }
 
-        public async Task CriarAsync(PlanoAcessoRequestDto dto)
+        public async Task<PlanoAcessoResponseDto?> CriarAsync(PlanoAcessoRequestDto dto)
         {
             // Buscar as áreas existentes no banco
             var areasExistentes = new List<AreaClube>();
@@ -77,6 +77,17 @@ namespace Application.Services
 
             await _planoAcessoRepository.AddAsync(novoPlano);
             await _planoAcessoRepository.SaveChangesAsync();
+
+            return new PlanoAcessoResponseDto
+            {
+                Id = novoPlano.Id,
+                Nome = novoPlano.Nome,
+                Areas = novoPlano.Areas.Select(a => new AreaClubeDto
+                {
+                    Id = a.Id,
+                    Nome = a.Nome
+                }).ToList()
+            };
         }
 
         public async Task AtualizarAsync(Guid id, PlanoAcessoRequestDto dto)

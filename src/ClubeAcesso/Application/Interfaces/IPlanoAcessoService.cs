@@ -11,7 +11,7 @@ namespace Application.Interfaces
     {
         Task<IEnumerable<PlanoAcessoResponseDto>> ListarAsync();
         Task<PlanoAcessoResponseDto?> ObterPorIdAsync(Guid id);
-        Task CriarAsync(PlanoAcessoRequestDto dto);
+        Task<PlanoAcessoResponseDto?> CriarAsync(PlanoAcessoRequestDto dto);
         Task AtualizarAsync(Guid id, PlanoAcessoRequestDto dto);
         Task RemoverAsync(Guid id);
     }

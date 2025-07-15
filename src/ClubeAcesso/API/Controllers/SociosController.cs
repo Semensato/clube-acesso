@@ -35,8 +35,8 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] SocioRequestDto dto)
         {
-            await _socioService.CriarAsync(dto);
-            return CreatedAtAction(nameof(ObterPorId), new { id = dto.Id }, dto);
+            var novoSocio = await _socioService.CriarAsync(dto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = novoSocio.Id }, dto);
         }
 
         [HttpPut("{id:guid}")]

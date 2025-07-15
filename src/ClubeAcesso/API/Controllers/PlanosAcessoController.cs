@@ -35,8 +35,8 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] PlanoAcessoRequestDto dto)
         {
-            await _planoAcessoService.CriarAsync(dto);
-            return CreatedAtAction(nameof(ObterPorId), new { id = dto.Id }, dto);
+            var novoPlano = await _planoAcessoService.CriarAsync(dto);
+            return CreatedAtAction(nameof(ObterPorId), new { id = novoPlano.Id }, dto);
         }
 
         [HttpPut("{id:guid}")]
