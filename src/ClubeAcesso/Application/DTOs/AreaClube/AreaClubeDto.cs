@@ -1,16 +1,14 @@
-﻿using Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs
+namespace Application.DTOs.AreaClube
 {
-    public class PlanoAcessoDto
+    public class AreaClubeDto
     {
         public Guid Id { get; set; }
         public string Nome { get; set; } = null!;
-        public ICollection<AreaClubeDto> Areas { get; set; } = null!;
     }
 }

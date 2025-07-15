@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs
+namespace Application.DTOs.TentativaAcesso
 {
-    public class TentativaAcessoDto
+    public class TentativaAcessoResponseDto
     {
         public Guid Id { get; set; }
         public Guid SocioId { get; set; }
