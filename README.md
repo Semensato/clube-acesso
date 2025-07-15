@@ -42,7 +42,7 @@ docker-compose up --build
 > - Construir a aplicação
 > - Subir o container do SQL Server
 > - Aplicar as migrations (se configurado)
-> - Disponibilizar a API em `http://localhost:5000`
+> - Disponibilizar a API em `http://localhost:8080`
 
 ---
 
@@ -51,8 +51,33 @@ docker-compose up --build
 Após subir a aplicação, acesse:
 
 ```
-http://localhost:5000/swagger
+http://localhost:8080/swagger
 ```
+
+---
+
+## 🧪 Fluxo para Testes Manuais
+
+Para testar a funcionalidade de tentativa de acesso, siga esta ordem ao usar a API (via Swagger ou outro cliente HTTP):
+
+1. **Cadastrar uma Área do Clube**
+   - **Endpoint:** `POST /api/areas`
+   - **Exemplo:** piscina, quadra, academia
+
+2. **Cadastrar um Plano de Acesso**
+   - **Endpoint:** `POST /api/planos`
+   - **Detalhe:** Inclua as áreas que esse plano permite acessar
+
+3. **Cadastrar um Sócio**
+   - **Endpoint:** `POST /api/socios`
+   - **Detalhe:** Relacione esse sócio com o plano criado acima
+
+4. **Registrar uma Tentativa de Acesso**
+   - **Endpoint:** `POST /api/tentativas`
+   - **Detalhe:** Informe o ID do sócio e o ID da área a ser acessada
+   - A API validará se o plano do sócio permite o acesso
+
+> ✅ **Resultado esperado:** A tentativa será registrada com status **Autorizado** ou **Negado**.
 
 ---
 
