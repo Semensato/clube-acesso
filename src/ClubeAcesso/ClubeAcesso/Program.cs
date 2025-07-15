@@ -1,3 +1,5 @@
+using Application.Interfaces;
+using Application.Services;
 using Domain.Repositories;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
@@ -19,6 +21,12 @@ builder.Services.AddScoped<ISocioRepository, SocioRepository>();
 builder.Services.AddScoped<IPlanoAcessoRepository, PlanoAcessoRepository>();
 builder.Services.AddScoped<IAreaClubeRepository, AreaClubeRepository>();
 builder.Services.AddScoped<ITentativaAcessoRepository, TentativaAcessoRepository>();
+
+builder.Services.AddScoped<ISocioService, SocioService>();
+builder.Services.AddScoped<IAreaClubeService, AreaClubeService>();
+builder.Services.AddScoped<IPlanoAcessoService, PlanoAcessoService>();
+builder.Services.AddScoped<ITentativaAcessoService, TentativaAcessoService>();
+
 
 var app = builder.Build();
 

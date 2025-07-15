@@ -26,17 +26,25 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Socio>> GetAllAsync()
         {
-            return await _context.Socios.ToListAsync();
+            return await _context.Socios
+                .Include(s => s.Plano)
+                    .ThenInclude(p => p.Areas)
+                .ToListAsync();
         }
 
         public async Task<Socio?> GetByIdAsync(Guid id)
         {
-            return await _context.Socios.FindAsync(id);
+            return await _context.Socios
+                .Include(s => s.Plano)
+                    .ThenInclude(p => p.Areas)
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<Socio?> GetByCpfAsync(string cpf)
         {
             return await _context.Socios
+                .Include(s => s.Plano)
+                    .ThenInclude(p => p.Areas)
                 .FirstOrDefaultAsync(s => s.Documento == cpf);
         }
 

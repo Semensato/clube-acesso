@@ -1,4 +1,6 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.AreaClube;
+using Application.DTOs.PlanoAcesso;
+using Application.DTOs.Socio;
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Repositories;
@@ -19,57 +21,87 @@ namespace Application.Services
             this._socioRepository = socioRepository;
         }
 
-        public async Task<IEnumerable<SocioDto>> ListarAsync()
+        public async Task<IEnumerable<SocioResponseDto>> ListarAsync()
         {
             var socios = await _socioRepository.GetAllAsync();
-            return socios.Select(s => new SocioDto
+            return socios.Select(s => new SocioResponseDto
             {
                 Id = s.Id,
                 Nome = s.Nome,
-                Documento = s.Documento
+                Documento = s.Documento,
+                Plano = new PlanoAcessoResponseDto
+                {
+                    Id = s.Plano.Id,
+                    Nome = s.Plano.Nome,
+                    Areas = s.Plano.Areas.Select(a => new AreaClubeDto
+                    {
+                        Id = a.Id,
+                        Nome = a.Nome
+                    }).ToList()
+                }
             });
         }
 
-        public async Task<SocioDto?> ObterPorIdAsync(Guid id)
+        public async Task<SocioResponseDto?> ObterPorIdAsync(Guid id)
         {
             var socio = await _socioRepository.GetByIdAsync(id);
             if (socio == null) return null;
 
-            return new SocioDto
+            return new SocioResponseDto
             {
                 Id = socio.Id,
                 Nome = socio.Nome,
-                Documento = socio.Documento
+                Documento = socio.Documento,
+                Plano = new PlanoAcessoResponseDto
+                {
+                    Id = socio.Plano.Id,
+                    Nome = socio.Plano.Nome,
+                    Areas = socio.Plano.Areas.Select(a => new AreaClubeDto
+                    {
+                        Id = a.Id,
+                        Nome = a.Nome
+                    }).ToList()
+                }
             };
         }
 
-        public async Task<SocioDto?> ObterPorCpfAsync(string cpf)
+        public async Task<SocioResponseDto?> ObterPorCpfAsync(string cpf)
         {
             var socio = await _socioRepository.GetByCpfAsync(cpf);
             if (socio == null) return null;
 
-            return new SocioDto
+            return new SocioResponseDto
             {
                 Id = socio.Id,
                 Nome = socio.Nome,
-                Documento = socio.Documento
+                Documento = socio.Documento,
+                Plano = new PlanoAcessoResponseDto
+                {
+                    Id = socio.Plano.Id,
+                    Areas = socio.Plano.Areas.Select(a => new AreaClubeDto
+                    {
+                        Id = a.Id,
+                        Nome = a.Nome
+                    }).ToList()
+                }
             };
         }
 
-        public async Task CriarAsync(SocioDto dto)
+        public async Task CriarAsync(SocioRequestDto dto)
         {
             var novoSocio = new Socio
             {
                 Id = Guid.NewGuid(),
                 Nome = dto.Nome,
-                Documento = dto.Documento
+                Documento = dto.Documento,
+                PlanoId = dto.PlanoId
             };
 
             await _socioRepository.AddAsync(novoSocio);
             await _socioRepository.SaveChangesAsync();
         }
 
-        public async Task AtualizarAsync(Guid id, SocioDto dto)
+        public async Task AtualizarAsync(Guid id, SocioRequestDto dto)
         {
             var socioExistente = await _socioRepository.GetByIdAsync(id);
             if (socioExistente == null)
@@ -77,6 +109,7 @@ namespace Application.Services
 
             socioExistente.Nome = dto.Nome;
             socioExistente.Documento = dto.Documento;
+            socioExistente.PlanoId = dto.PlanoId;
 
             _socioRepository.Update(socioExistente);
             await _socioRepository.SaveChangesAsync();
