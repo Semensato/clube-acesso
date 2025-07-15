@@ -100,6 +100,11 @@ namespace Application.Services
             await _socioRepository.AddAsync(novoSocio);
             await _socioRepository.SaveChangesAsync();
 
+            novoSocio = await _socioRepository.GetByIdAsync(novoSocio.Id);
+
+            if (novoSocio == null)
+                return null;
+
             return new SocioResponseDto
             {
                 Id= novoSocio.Id,
