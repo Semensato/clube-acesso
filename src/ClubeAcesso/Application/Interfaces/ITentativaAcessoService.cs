@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.TentativaAcesso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Application.Interfaces
 {
     public interface ITentativaAcessoService
     {
-        Task RegistrarAcessoAsync(TentativaAcessoDto dto);
-        Task<IEnumerable<TentativaAcessoDto>> ObterPorSocioIdAsync(Guid socioId);
+        Task RegistrarAcessoAsync(TentativaAcessoRequestDto dto);
+        Task<IEnumerable<TentativaAcessoResponseDto>> ObterPorSocioIdAsync(Guid socioId);
     }
 }

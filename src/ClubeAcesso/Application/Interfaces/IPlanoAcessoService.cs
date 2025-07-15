@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.PlanoAcesso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace Application.Interfaces
 {
     public interface IPlanoAcessoService
     {
-        Task<IEnumerable<PlanoAcessoDto>> ListarAsync();
-        Task<PlanoAcessoDto?> ObterPorIdAsync(Guid id);
-        Task CriarAsync(PlanoAcessoDto dto);
-        Task AtualizarAsync(Guid id, PlanoAcessoDto dto);
+        Task<IEnumerable<PlanoAcessoResponseDto>> ListarAsync();
+        Task<PlanoAcessoResponseDto?> ObterPorIdAsync(Guid id);
+        Task CriarAsync(PlanoAcessoRequestDto dto);
+        Task AtualizarAsync(Guid id, PlanoAcessoRequestDto dto);
         Task RemoverAsync(Guid id);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.AreaClube;
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Repositories;

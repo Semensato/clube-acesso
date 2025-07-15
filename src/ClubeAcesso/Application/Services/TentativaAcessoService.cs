@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.TentativaAcesso;
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Enums;
@@ -30,7 +30,7 @@ namespace Application.Services
             _areaClubeRepository = areaClubeRepository;
         }
 
-        public async Task RegistrarAcessoAsync(TentativaAcessoDto dto)
+        public async Task RegistrarAcessoAsync(TentativaAcessoRequestDto dto)
         {
             // Busca sócio
             var socio = await _socioRepository.GetByIdAsync(dto.SocioId);
@@ -63,10 +63,10 @@ namespace Application.Services
             await _tentativaAcessoRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TentativaAcessoDto>> ObterPorSocioIdAsync(Guid socioId)
+        public async Task<IEnumerable<TentativaAcessoResponseDto>> ObterPorSocioIdAsync(Guid socioId)
         {
             var tentativas = await _tentativaAcessoRepository.GetBySocioIdAsync(socioId);
-            return tentativas.Select(t => new TentativaAcessoDto
+            return tentativas.Select(t => new TentativaAcessoResponseDto
             {
                 Id = t.Id,
                 SocioId = t.SocioId,
