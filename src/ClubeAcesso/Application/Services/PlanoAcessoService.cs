@@ -31,7 +31,7 @@ namespace Application.Services
             {
                 Id = p.Id,
                 Nome = p.Nome,
-                Areas = p.Areas.Select(a => new AreaClubeDto
+                Areas = p.Areas.Select(a => new AreaClubeResponseDto
                 {
                     Id = a.Id,
                     Nome = a.Nome
@@ -48,7 +48,7 @@ namespace Application.Services
             {
                 Id = plano.Id,
                 Nome = plano.Nome,
-                Areas = plano.Areas.Select(a => new AreaClubeDto
+                Areas = plano.Areas.Select(a => new AreaClubeResponseDto
                 {
                     Id = a.Id,
                     Nome = a.Nome
@@ -82,7 +82,7 @@ namespace Application.Services
             {
                 Id = novoPlano.Id,
                 Nome = novoPlano.Nome,
-                Areas = novoPlano.Areas.Select(a => new AreaClubeDto
+                Areas = novoPlano.Areas.Select(a => new AreaClubeResponseDto
                 {
                     Id = a.Id,
                     Nome = a.Nome

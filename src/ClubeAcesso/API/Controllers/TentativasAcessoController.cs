@@ -1,4 +1,5 @@
-﻿using Application.DTOs.TentativaAcesso;
+﻿using Application.DTOs.Socio;
+using Application.DTOs.TentativaAcesso;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,16 +20,18 @@ namespace API.Controllers
         /// Registra uma tentativa de acesso por um sócio a uma área do clube.
         /// </summary>
         [HttpPost]
+        [ProducesResponseType(typeof(TentativaAcessoResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> Registrar([FromBody] TentativaAcessoRequestDto dto)
         {
-            await _tentativaAcessoService.RegistrarAcessoAsync(dto);
-            return Ok(new { mensagem = "Tentativa de acesso registrada com sucesso." });
+            var tentativaAcessso = await _tentativaAcessoService.RegistrarAcessoAsync(dto);
+            return Ok(tentativaAcessso);
         }
 
         /// <summary>
         /// Lista todas as tentativas de acesso de um sócio.
         /// </summary>
         [HttpGet("socio/{socioId:guid}")]
+        [ProducesResponseType(typeof(TentativaAcessoResponseDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterPorSocio(Guid socioId)
         {
             var tentativas = await _tentativaAcessoService.ObterPorSocioIdAsync(socioId);

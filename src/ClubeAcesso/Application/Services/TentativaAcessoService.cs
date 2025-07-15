@@ -30,7 +30,7 @@ namespace Application.Services
             _areaClubeRepository = areaClubeRepository;
         }
 
-        public async Task RegistrarAcessoAsync(TentativaAcessoRequestDto dto)
+        public async Task<TentativaAcessoResponseDto?> RegistrarAcessoAsync(TentativaAcessoRequestDto dto)
         {
             // Busca sócio
             var socio = await _socioRepository.GetByIdAsync(dto.SocioId);
@@ -61,6 +61,15 @@ namespace Application.Services
 
             await _tentativaAcessoRepository.AddAsync(tentativa);
             await _tentativaAcessoRepository.SaveChangesAsync();
+
+            return new TentativaAcessoResponseDto
+            {
+                Id = tentativa.Id,
+                SocioId = tentativa.SocioId,
+                AreaId = tentativa.AreaId,
+                DataHora = tentativa.DataHora,
+                Resultado = tentativa.Resultado
+            };
         }
 
         public async Task<IEnumerable<TentativaAcessoResponseDto>> ObterPorSocioIdAsync(Guid socioId)

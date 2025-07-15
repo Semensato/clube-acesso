@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.AreaClube
 {
-    public class AreaClubeDto
+    public class AreaClubeRequestDto
     {
-        public Guid Id { get; set; }
         public string Nome { get; set; } = null!;
     }
 }
