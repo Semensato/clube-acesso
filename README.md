@@ -9,7 +9,6 @@ API REST para controle de acesso a áreas de um clube. Desenvolvido em .NET 8 co
 - [.NET 8](https://dotnet.microsoft.com/)
 - Entity Framework Core
 - SQL Server (via Docker)
-- SQLite (para testes ou ambiente local)
 - xUnit (testes automatizados)
 - Moq (mocking nos testes)
 - Swagger (interface de documentação e testes HTTP)
@@ -35,7 +34,7 @@ Certifique-se de que você tem o [Docker](https://www.docker.com/) e o [Docker C
 ### ▶️ Subir o ambiente:
 
 ```bash
-docker-compose up --build
+(clube-acesso/src) docker-compose up --build
 ```
 
 > Isso irá:
@@ -61,23 +60,23 @@ http://localhost:8080/swagger
 Para testar a funcionalidade de tentativa de acesso, siga esta ordem ao usar a API (via Swagger ou outro cliente HTTP):
 
 1. **Cadastrar uma Área do Clube**
-   - **Endpoint:** `POST /api/areas`
+   - **Endpoint:** `POST /api/AreasClube`
    - **Exemplo:** piscina, quadra, academia
 
 2. **Cadastrar um Plano de Acesso**
-   - **Endpoint:** `POST /api/planos`
+   - **Endpoint:** `POST /api/PlanosAcesso`
    - **Detalhe:** Inclua as áreas que esse plano permite acessar
 
 3. **Cadastrar um Sócio**
-   - **Endpoint:** `POST /api/socios`
+   - **Endpoint:** `POST /api/Socios`
    - **Detalhe:** Relacione esse sócio com o plano criado acima
 
 4. **Registrar uma Tentativa de Acesso**
-   - **Endpoint:** `POST /api/tentativas`
+   - **Endpoint:** `POST /api/TentativasAcesso`
    - **Detalhe:** Informe o ID do sócio e o ID da área a ser acessada
    - A API validará se o plano do sócio permite o acesso
 
-> ✅ **Resultado esperado:** A tentativa será registrada com status **Autorizado** ou **Negado**.
+> ✅ **Resultado esperado:** A tentativa será registrada com status **Autorizado(0)** ou **Negado(1)**.
 
 ---
 
