@@ -135,5 +135,5 @@ docker-compose.yml               → Infra com SQL Server + API
 ## 📬 Contato
 
 Desenvolvido por **Guilherme Semensato**  
-📧 seu-email@email.com  
-📎 GitHub: [https://github.com/seu-usuario](https://github.com/seu-usuario)
+📧 guilherme_semensato@hotmail.com.br  
+📎 GitHub: [https://github.com/Semensato](https://github.com/Semensato)
